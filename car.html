@@ -727,6 +727,16 @@
 // IMPORTANT: Replace this with your deployed Cloudflare Worker URL.
 const WORKER_URL = "https://silent-feather-d5a7.changreary87.workers.dev";
 
+// Warm up the Cloudflare Worker connection as soon as the cart page loads.
+// This GET request does not create a Draft Order.
+if (WORKER_URL.startsWith("https://")) {
+  fetch(WORKER_URL, {
+    method: "GET",
+    mode: "cors",
+    cache: "no-store"
+  }).catch(() => {});
+}
+
 const fulfillmentOptions =
   document.querySelectorAll(".fulfillment-option");
 
@@ -865,11 +875,6 @@ document
       button.textContent = originalButtonText;
     }
   });
-fetch("https://silent-feather-d5a7.changreary87.workers.dev/", {
-  method: "GET",
-  mode: "cors",
-  cache: "no-store"
-}).catch(() => {});
 
 refreshFulfillmentSelection();
 </script>
