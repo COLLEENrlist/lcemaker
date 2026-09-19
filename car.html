@@ -865,6 +865,11 @@ document
       button.textContent = originalButtonText;
     }
   });
+fetch("https://silent-feather-d5a7.changreary87.workers.dev/", {
+  method: "GET",
+  mode: "cors",
+  cache: "no-store"
+}).catch(() => {});
 
 refreshFulfillmentSelection();
 </script>
